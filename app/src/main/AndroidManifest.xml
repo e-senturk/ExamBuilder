@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="tr.edu.yildiz.ertugrulsenturk">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -9,7 +10,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.LoginApplication">
+        android:theme="@style/Theme.LoginApplication"
+        android:allowBackup="false"
+        tools:ignore="AllowBackup">
         <activity android:name=".view.activity.ExamActivity" />
         <activity android:name=".view.activity.QuestionSelectActivity" />
         <activity android:name=".view.activity.ExamSettingsActivity" />
