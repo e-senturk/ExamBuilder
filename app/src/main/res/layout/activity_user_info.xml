@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    tools:context=".view.activity.UserInfoActivity">
+
+    <ImageView
+        android:id="@+id/userImageInfo"
+        android:layout_width="179dp"
+        android:layout_height="161dp"
+        android:onClick="updateUserImage"
+        android:contentDescription="@string/user_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/user_icon" />
+
+    <EditText
+        android:id="@+id/userFirstNameInfo"
+        style="@style/EditTextStyle"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="40dp"
+        android:hint="@string/user_first_name"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/userImageInfo"
+        android:autofillHints="."
+        android:inputType="textPersonName"/>
+
+    <EditText
+        android:id="@+id/userLastNameInfo"
+        style="@style/EditTextStyle"
+        android:layout_width="200dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="12dp"
+        android:hint="@string/user_last_name"
+        app:layout_constraintStart_toStartOf="@+id/userFirstNameInfo"
+        app:layout_constraintTop_toBottomOf="@+id/userFirstNameInfo"
+        android:autofillHints="."
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/userEmailInfo"
+        style="@style/EditTextStyle"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:inputType="textEmailAddress"
+        android:hint="@string/user_mail"
+        android:autofillHints="."
+        app:layout_constraintStart_toStartOf="@+id/userLastNameInfo"
+        app:layout_constraintTop_toBottomOf="@+id/userLastNameInfo" />
+
+    <EditText
+        android:id="@+id/userPasswordInfo"
+        style="@style/EditTextStyle"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="@string/password"
+        android:autofillHints="."
+        android:inputType="textVisiblePassword"
+        app:layout_constraintStart_toStartOf="@+id/userPhoneNumberInfo"
+        app:layout_constraintTop_toBottomOf="@+id/userPhoneNumberInfo" />
+
+    <EditText
+        android:id="@+id/userPhoneNumberInfo"
+        style="@style/EditTextStyle"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="@string/user_phone_number"
+        android:autofillHints="."
+        android:inputType="phone"
+        app:layout_constraintStart_toStartOf="@+id/userEmailInfo"
+        app:layout_constraintTop_toBottomOf="@+id/userEmailInfo" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/save"
+        android:onClick="updateUser"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userPasswordInfo" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:text="@string/user_first_name"
+        app:layout_constraintBottom_toBottomOf="@+id/userFirstNameInfo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/userFirstNameInfo"
+        app:layout_constraintVertical_bias="0.48" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_last_name"
+        app:layout_constraintBottom_toBottomOf="@+id/userLastNameInfo"
+        app:layout_constraintStart_toStartOf="@+id/textView8"
+        app:layout_constraintTop_toTopOf="@+id/userLastNameInfo" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_mail"
+        app:layout_constraintBottom_toBottomOf="@+id/userEmailInfo"
+        app:layout_constraintStart_toStartOf="@+id/textView9"
+        app:layout_constraintTop_toTopOf="@+id/userEmailInfo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/password"
+        app:layout_constraintBottom_toBottomOf="@+id/userPasswordInfo"
+        app:layout_constraintStart_toStartOf="@+id/textView13"
+        app:layout_constraintTop_toTopOf="@+id/userPasswordInfo" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_phone_number"
+        app:layout_constraintBottom_toBottomOf="@+id/userPhoneNumberInfo"
+        app:layout_constraintStart_toStartOf="@+id/textView10"
+        app:layout_constraintTop_toTopOf="@+id/userPhoneNumberInfo" />
+</androidx.constraintlayout.widget.ConstraintLayout>

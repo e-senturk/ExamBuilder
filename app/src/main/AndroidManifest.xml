@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="tr.edu.yildiz.ertugrulsenturk">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:icon="@mipmap/logo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/logo"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.LoginApplication">
+        <activity android:name=".view.activity.ExamActivity" />
+        <activity android:name=".view.activity.QuestionSelectActivity" />
+        <activity android:name=".view.activity.ExamSettingsActivity" />
+        <activity android:name=".view.activity.ExamGeneratorActivity" />
+        <activity android:name=".view.activity.AddQuestionActivity" />
+        <activity android:name=".view.activity.MenuActivity" />
+        <activity android:name=".view.activity.QuestionListActivity" />
+        <activity android:name=".view.activity.SignUpActivity" />
+        <activity android:name=".view.activity.UserInfoActivity" />
+        <activity android:name=".view.activity.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+    </application>
+
+</manifest>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    tools:context=".view.activity.ExamSettingsActivity">
+
+    <RadioGroup
+        android:id="@+id/radioGroupDifficultySettings"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/timerPickerSettings"
+        app:layout_constraintStart_toStartOf="@+id/timerPickerSettings"
+        app:layout_constraintTop_toBottomOf="@+id/timerPickerSettings">
+
+        <RadioButton
+            android:id="@+id/radioButtonDifficulty2Settings"
+            android:layout_width="62.5dp"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/two"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioButton
+            android:id="@+id/radioButtonDifficulty3Settings"
+            android:layout_width="62.5dp"
+            android:layout_height="wrap_content"
+            android:text="@string/three"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioButton
+            android:id="@+id/radioButtonDifficulty4Settings"
+            android:layout_width="62.5dp"
+            android:layout_height="wrap_content"
+            android:text="@string/four"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioButton
+            android:id="@+id/radioButtonDifficulty5Settings"
+            android:layout_width="62.5dp"
+            android:layout_height="wrap_content"
+            android:text="@string/five"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/difficulty_level"
+        app:layout_constraintBottom_toBottomOf="@+id/radioGroupDifficultySettings"
+        app:layout_constraintStart_toStartOf="@+id/textView21"
+        app:layout_constraintTop_toTopOf="@+id/radioGroupDifficultySettings" />
+
+    <NumberPicker
+        android:id="@+id/timerPickerSettings"
+        android:layout_width="250dp"
+        android:layout_height="114dp"
+        android:layout_marginEnd="44dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </NumberPicker>
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/exam_time"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroupDifficultySettings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/timerPickerSettings" />
+
+    <Button
+        android:id="@+id/buttonSettingsSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/save"
+        android:onClick="saveSettings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupDifficultySettings" />
+</androidx.constraintlayout.widget.ConstraintLayout>
