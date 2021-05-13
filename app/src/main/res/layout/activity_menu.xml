@@ -4,77 +4,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_marginTop="20dp"
     android:layout_marginLeft="10dp"
+    android:layout_marginTop="20dp"
     android:layout_marginRight="10dp"
+    android:orientation="vertical"
     tools:context=".view.activity.MenuActivity">
 
     <Button
+        style="@style/ImageAndTextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="textStart"
-        android:text="@string/add_question"
         android:onClick="addQuestion"
-        style="@style/ImageAndTextButton"
+        android:text="@string/add_question"
+        android:textAlignment="textStart"
         app:icon="@drawable/add"
-        app:iconTint="@color/blue"
         app:iconGravity="start"
-        />
+        app:iconTint="@color/blue" />
+
     <Button
+        style="@style/ImageAndTextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="textStart"
         android:onClick="listQuestions"
-        style="@style/ImageAndTextButton"
         android:text="@string/list_questions"
-        app:iconTint="@color/pale_green"
+        android:textAlignment="textStart"
         app:icon="@drawable/list"
         app:iconGravity="start"
-        />
+        app:iconTint="@color/pale_green" />
+
     <Button
+        style="@style/ImageAndTextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="textStart"
-        style="@style/ImageAndTextButton"
         android:onClick="examSettings"
         android:text="@string/exam_settings"
+        android:textAlignment="textStart"
         app:icon="@drawable/settings"
-        app:iconTint="@color/orange"
         app:iconGravity="start"
-        />
+        app:iconTint="@color/orange" />
+
     <Button
+        style="@style/ImageAndTextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="textStart"
-        style="@style/ImageAndTextButton"
         android:onClick="createExam"
         android:text="@string/create_exam"
+        android:textAlignment="textStart"
         app:icon="@drawable/edit"
-        app:iconTint="@color/dark_green"
         app:iconGravity="start"
-        />
+        app:iconTint="@color/dark_green" />
+
     <Button
+        style="@style/ImageAndTextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="textStart"
-        android:text="@string/user_info"
         android:onClick="userInformation"
-        style="@style/ImageAndTextButton"
+        android:text="@string/user_info"
+        android:textAlignment="textStart"
         app:icon="@drawable/user_info"
-        app:iconTint="@color/yellow"
         app:iconGravity="start"
-        />
+        app:iconTint="@color/yellow" />
+
     <Button
+        style="@style/ImageAndTextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="textStart"
-        android:text="@string/log_out"
         android:onClick="logOut"
-        style="@style/ImageAndTextButton"
+        android:text="@string/log_out"
+        android:textAlignment="textStart"
         app:icon="@drawable/logout"
-        app:iconTint="@color/medium_green"
         app:iconGravity="start"
-        />
+        app:iconTint="@color/medium_green" />
 
 </LinearLayout>

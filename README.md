@@ -3,7 +3,7 @@ An Easy Exam Creator For Android
 
 # Features:
 - Supports creating seperate users
-- User account keep login until user logout
+- User keeps login until logout
 - User can add questions with or without attachment
 - Questions can have up to five choices
 - Attachment can be image, video or audio
@@ -16,8 +16,8 @@ An Easy Exam Creator For Android
 - User can save or delete exams, share them as a text file
 - User can start exam with given settings
 - User can edit user information after login
-- Attachment files storing in local storage
-- Other informations storing in local SQL database.
+- Attachment files are storing in local storage
+- Other pieces of information files are storing in local SQL database.
 - Supports dark mode
 - Supports portrait and landscape oriantation and various screen sizes
 - Supports english and turkish languages

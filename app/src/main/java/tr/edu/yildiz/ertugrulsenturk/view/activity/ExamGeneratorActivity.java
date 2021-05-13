@@ -27,6 +27,9 @@ import tr.edu.yildiz.ertugrulsenturk.service.tools.ExamTools;
 import tr.edu.yildiz.ertugrulsenturk.service.tools.StorageTools;
 
 public class ExamGeneratorActivity extends AppCompatActivity {
+    /**
+     * An activity for generating new exam
+     */
     private User currentUser;
     private Exam selectedExam;
     private ArrayList<String> selectedQuestions;
@@ -42,6 +45,7 @@ public class ExamGeneratorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exam_generator);
         setTitle(R.string.create_exam);
+        // read current user for accessing database
         Intent intent = getIntent();
         currentUser = (User) intent.getSerializableExtra("user");
         selectedQuestions = null;
@@ -53,13 +57,15 @@ public class ExamGeneratorActivity extends AppCompatActivity {
         deleteExamButton = findViewById(R.id.deleteExamButton);
         numberPicker.setMaxValue(90);
         numberPicker.setMinValue(5);
+        // read exam settings from shared preferences
         resetSettings();
 
-
+        // exams object only stores exam names
         exams = ExamDataBase.getExamNames(this, MODE_PRIVATE, currentUser);
         if (exams == null) {
             exams = new ArrayList<>();
         }
+        // setting for exam list spinner
         exams.add(0, getString(R.string.new_exam));
         ArrayAdapter<String> examAdapter = new ArrayAdapter<>(
                 this,
@@ -67,6 +73,7 @@ public class ExamGeneratorActivity extends AppCompatActivity {
                 exams
         );
         examCodeSpinner.setAdapter(examAdapter);
+        // selected fields must be updated when selecting a new exam
         examCodeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -97,6 +104,7 @@ public class ExamGeneratorActivity extends AppCompatActivity {
         });
     }
 
+    // opens question selector activity
     public void selectQuestion(View view) {
         Intent intent = new Intent(ExamGeneratorActivity.this, QuestionSelectActivity.class);
         intent.putExtra("user", currentUser);
@@ -104,6 +112,7 @@ public class ExamGeneratorActivity extends AppCompatActivity {
         startActivityForResult(intent, 1);
     }
 
+    // saves exam first and start the exam
     public void startExam(View view) {
         saveExam(view);
         if (selectedExam != null) {
@@ -114,6 +123,7 @@ public class ExamGeneratorActivity extends AppCompatActivity {
         }
     }
 
+    // resets exam settings
     public void resetSettings() {
         SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
         numberPicker.setValue(sharedPreferences.getInt("exam_time", 30));
@@ -121,12 +131,14 @@ public class ExamGeneratorActivity extends AppCompatActivity {
         difficultyGroup.check(difficultyGroup.getChildAt(difficulty - 2).getId());
     }
 
+    // saves exam
     public void saveExam(View view) {
         String examID = examIdInfo.getText().toString();
         int examTime = numberPicker.getValue();
         int radioButtonID = difficultyGroup.getCheckedRadioButtonId();
         View radioButton = difficultyGroup.findViewById(radioButtonID);
         int difficulty = difficultyGroup.indexOfChild(radioButton) + 2;
+        // validate and generate new exam object
         if (examID.equals("")) {
             Toast.makeText(this, getString(R.string.exam_code_cannot_be_empty), Toast.LENGTH_SHORT).show();
             return;
@@ -137,34 +149,37 @@ public class ExamGeneratorActivity extends AppCompatActivity {
             Toast.makeText(this, getString(R.string.this_exam_id_already_exists), Toast.LENGTH_SHORT).show();
             return;
         }
-        Exam exam = new Exam(examID, difficulty, examTime, selectedQuestions, currentUser.getEMail());
-        selectedExam = exam;
+        selectedExam = new Exam(examID, difficulty, examTime, selectedQuestions, currentUser.getEMail());
+        // add reset or update fields after saving new exam
         if (examCodeSpinner.getSelectedItemPosition() == 0) {
-            boolean success = ExamDataBase.addExam(this, MODE_PRIVATE, exam, currentUser);
+            boolean success = ExamDataBase.addExam(this, MODE_PRIVATE, selectedExam, currentUser);
             exams.add(examID);
-            if(success && view.getId() == R.id.saveExamButton){
+            if (success && view.getId() == R.id.saveExamButton) {
                 Toast.makeText(this, getString(R.string.exam_saved), Toast.LENGTH_SHORT).show();
             }
         } else {
-            boolean success = ExamDataBase.updateExam(this, MODE_PRIVATE, exam, currentUser);
-            if(success && view.getId() == R.id.saveExamButton){
+            boolean success = ExamDataBase.updateExam(this, MODE_PRIVATE, selectedExam, currentUser);
+            if (success && view.getId() == R.id.saveExamButton) {
                 Toast.makeText(this, getString(R.string.exam_updated), Toast.LENGTH_SHORT).show();
             }
         }
+        // share exam as txt file
         if (view == findViewById(R.id.shareExamButton)) {
             String examText = ExamTools.convertExamToString(this, MODE_PRIVATE, selectedExam, currentUser);
-            String fileName = exam.getExamCode() +"_"+currentUser.getUserFirstName().toLowerCase()
-                    +"_" + currentUser.getUserLastName().toLowerCase() + ".txt";
+            String fileName = selectedExam.getExamCode() + "_" + currentUser.getUserFirstName().toLowerCase()
+                    + "_" + currentUser.getUserLastName().toLowerCase() + ".txt";
             StorageTools.share(this, examText,
                     fileName,
                     getString(R.string.share_exam_as_file),
                     getString(R.string.share_exam_title));
         }
+        // show delete button and disable examID editing because its a private key
         deleteExamButton.setVisibility(View.VISIBLE);
         examIdInfo.setEnabled(false);
         examCodeSpinner.setSelection(exams.size() - 1);
     }
 
+    // deletes exam with an alert dialog
     public void deleteExam(View view) {
         if (selectedExam != null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -182,7 +197,7 @@ public class ExamGeneratorActivity extends AppCompatActivity {
         }
     }
 
-
+    // gets selected questions from question select activity
     @SuppressWarnings("unchecked")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -18,6 +18,9 @@ import tr.edu.yildiz.ertugrulsenturk.model.User;
 import tr.edu.yildiz.ertugrulsenturk.service.database.QuestionDataBase;
 
 public class QuestionSelectActivity extends AppCompatActivity {
+    /**
+     * An activity for selecting questions only with their names
+     */
     private ArrayList<Question> questions;
     private ArrayList<String> selectedQuestions;
 
@@ -27,14 +30,15 @@ public class QuestionSelectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_select);
         setTitle(getString(R.string.select_question));
+        // Gets user or selected questions from previous activity
         Intent intent = getIntent();
         User currentUser = (User) intent.getSerializableExtra("user");
         selectedQuestions = (ArrayList<String>) intent.getSerializableExtra("selected_questions");
         questions = QuestionDataBase.getQuestions(this, MODE_PRIVATE, currentUser);
-        System.out.println(questions.size());
         setupRecycler();
     }
 
+    // starts recycler view
     private void setupRecycler() {
         RecyclerView recyclerView = findViewById(R.id.recyclerViewSelect);
         recyclerView.setLayoutManager(new LinearLayoutManager(QuestionSelectActivity.this));

@@ -15,6 +15,9 @@ import org.jetbrains.annotations.NotNull;
 import tr.edu.yildiz.ertugrulsenturk.R;
 
 public class ResultFragment extends Fragment {
+    /**
+     * Fragment for showing exam results
+     */
     private static String userName;
     private static String correct;
     private static String incorrect;
@@ -26,6 +29,7 @@ public class ResultFragment extends Fragment {
         ResultFragment.correct = String.valueOf(correct);
         ResultFragment.incorrect = String.valueOf(incorrect);
         ResultFragment.unanswered = String.valueOf(unanswered);
+        // calculate grade from correct incorrect and unanswered question count
         ResultFragment.grade = String.valueOf((correct * 100) / (correct + incorrect + unanswered));
         return new ResultFragment();
     }

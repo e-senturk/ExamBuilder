@@ -40,6 +40,9 @@ import tr.edu.yildiz.ertugrulsenturk.service.tools.QuestionTools;
 import tr.edu.yildiz.ertugrulsenturk.service.tools.StorageTools;
 
 public class AddQuestionActivity extends AppCompatActivity {
+    /**
+     * An activity for adding or editing a question
+     */
     Bitmap attachmentBitmap;
     String attachmentPath;
     private TextView newQuestionText;
@@ -59,6 +62,7 @@ public class AddQuestionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_question);
+        // in this layout we are not allowing to change rotation for avoid data loss
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
         setTitle(R.string.add_new_question);
         newQuestionText = findViewById(R.id.newQuestionText);
@@ -68,18 +72,27 @@ public class AddQuestionActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imageViewQuestion);
         attachmentType = findViewById(R.id.attachmentTypeRadioGroup);
         attachmentType.check(R.id.noneAttachmentRadioButton);
+        // choices stores choice's linear layout
         choices = new ArrayList<>();
+        // answers stores answer's radio button
         answers = new ArrayList<>();
+        // attachment Bitmap stores imageView information
         attachmentBitmap = null;
+        // stores attachment's path location
         attachmentPath = "";
+        // we need to get user info
+        // also we need question's order in questions list and question itself for editing
         Intent intent = getIntent();
         currentUser = (User) intent.getSerializableExtra("user");
         question = (Question) intent.getSerializableExtra("question");
         position = intent.getIntExtra("position", -1);
+        // initialize choice layout
         addChoice(true);
+        // if question is not null then we are in editing mode
         if (question != null) {
             updateFields();
         }
+        // while clicking attachment type radio buttons we need to clear previous data
         attachmentType.setOnCheckedChangeListener((group, checkedId) -> {
             imageUri = null;
             videoUri = null;
@@ -90,9 +103,9 @@ public class AddQuestionActivity extends AppCompatActivity {
         });
     }
 
-
+    // saves or updates a question
     public void saveNewQuestion(View view) {
-
+        // validation for question
         if (newQuestionText.getText().toString().equals("")) {
             Toast.makeText(this, getString(R.string.question_cannot_be_empty), Toast.LENGTH_SHORT).show();
             return;
@@ -103,12 +116,17 @@ public class AddQuestionActivity extends AppCompatActivity {
             Toast.makeText(this, getString(R.string.choices_cannot_be_empty), Toast.LENGTH_SHORT).show();
             return;
         } else {
+            // create none type attachment for empty attachment
             Attachment attachment = new Attachment("-", "none", "-");
+            // check fields for correct attachment
             String attachmentTypeString = getAttachmentTypeString();
+            // if attachment selected in correct form then create new attachment class
             if (!attachmentTypeString.equals("") && !attachmentPath.equals("")) {
                 attachment = new Attachment(attachmentTypeString + "~" + attachmentPath);
             }
+            // create new question from fields
             Question newQuestion = new Question("-1", currentUser.getEMail(), newQuestionText.getText().toString(), QuestionTools.getChoicesAsArrayList(choices), getSelectedAnswer(), attachment);
+            // set questions private keys
             if (question != null) {
                 newQuestion.setPrivateKey(question.getPrivateKey());
                 QuestionDataBase.updateQuestion(this, MODE_PRIVATE, newQuestion, currentUser);
@@ -122,13 +140,16 @@ public class AddQuestionActivity extends AppCompatActivity {
                 QuestionDataBase.addQuestion(this, MODE_PRIVATE, newQuestion);
             }
         }
+        // if question is not null then we are in editing mode we must finish activity
         if (question != null) {
             finish();
         } else {
+            // if question is a new question then only clearUI
             clearUI();
         }
     }
 
+    // checks necessary fields for finding valid attachment
     public void getAttachment(View view) {
         if (attachmentType.getCheckedRadioButtonId() == R.id.imageAttachmentRadioButton) {
             getImage();
@@ -144,7 +165,7 @@ public class AddQuestionActivity extends AppCompatActivity {
         }
     }
 
-
+    // intent for gallery to get video
     public void getVideo() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
@@ -154,6 +175,7 @@ public class AddQuestionActivity extends AppCompatActivity {
         }
     }
 
+    // intent for gallery to get image
     public void getImage() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 3);
@@ -163,6 +185,7 @@ public class AddQuestionActivity extends AppCompatActivity {
         }
     }
 
+    // intent for gallery to get audio
     public void getAudio() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 5);
@@ -174,6 +197,7 @@ public class AddQuestionActivity extends AppCompatActivity {
     }
 
 
+    // start intent's automatically after gathering permissions
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == 1) {
@@ -196,6 +220,7 @@ public class AddQuestionActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
+    // after getting intent results fill fields with proper values
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         videoUri = null;
@@ -227,6 +252,7 @@ public class AddQuestionActivity extends AppCompatActivity {
     }
 
 
+    // clear all ui elements
     public void clearUI() {
         newQuestionText.setText("");
         choices.clear();
@@ -245,6 +271,7 @@ public class AddQuestionActivity extends AppCompatActivity {
         addChoice(true);
     }
 
+    // update UI elements for editing old question
     public void updateFields() {
         String questionInfo = question.getQuestion();
         ArrayList<String> choicesInfo = question.getChoices();
@@ -272,11 +299,12 @@ public class AddQuestionActivity extends AppCompatActivity {
 
     }
 
-
+    // returns selected question's answer value
     public int getSelectedAnswer() {
         return newQuestionAnswerGroup.indexOfChild(findViewById(newQuestionAnswerGroup.getCheckedRadioButtonId()));
     }
 
+    // creates or removes new layout's for new choices
     public void addChoice(boolean initialize) {
         LayoutInflater inflater = LayoutInflater.from(this);
         LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.layout_question_choice, choicesLayout, false);
@@ -296,6 +324,7 @@ public class AddQuestionActivity extends AppCompatActivity {
         }
     }
 
+    // choice adding or removing function
     public void choiceEditor(View view) {
         // get pressed buttons index
         LinearLayout parent = (LinearLayout) view.getParent();
@@ -338,6 +367,7 @@ public class AddQuestionActivity extends AppCompatActivity {
         }
     }
 
+    // gets attachment type as a string from radio buttons
     private String getAttachmentTypeString() {
         if (attachmentType.getCheckedRadioButtonId() == R.id.imageAttachmentRadioButton) {
             if (attachmentBitmap != null && imageUri != null) {
@@ -355,6 +385,6 @@ public class AddQuestionActivity extends AppCompatActivity {
                 return "audio";
             }
         }
-        return "";
+        return "none";
     }
 }

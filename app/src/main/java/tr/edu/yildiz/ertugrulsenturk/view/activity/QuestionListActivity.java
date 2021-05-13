@@ -16,6 +16,9 @@ import tr.edu.yildiz.ertugrulsenturk.model.User;
 import tr.edu.yildiz.ertugrulsenturk.service.database.QuestionDataBase;
 
 public class QuestionListActivity extends AppCompatActivity {
+    /**
+     * An activity for listing all questions
+     */
     private static RecyclerView recyclerView;
     private ArrayList<Question> questions;
     private User currentUser;
@@ -29,12 +32,14 @@ public class QuestionListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_list);
         setTitle(R.string.questions);
+        // get user from previous activity
         Intent intent = getIntent();
         currentUser = (User) intent.getSerializableExtra("user");
         questions = QuestionDataBase.getQuestions(this, MODE_PRIVATE, currentUser);
         setupRecycler();
     }
 
+    // shows recycler view
     private void setupRecycler() {
         recyclerView = findViewById(R.id.recyclerViewQuestionList);
         recyclerView.setLayoutManager(new LinearLayoutManager(QuestionListActivity.this));

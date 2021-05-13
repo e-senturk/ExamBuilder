@@ -8,7 +8,7 @@
         android:id="@+id/dialogImageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@string/dialog_image"
         tools:layout_editor_absoluteX="18dp"
-        tools:layout_editor_absoluteY="16dp"
-        android:contentDescription="@string/dialog_image" />
+        tools:layout_editor_absoluteY="16dp" />
 </LinearLayout>

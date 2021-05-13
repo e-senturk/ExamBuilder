@@ -12,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import tr.edu.yildiz.ertugrulsenturk.R;
 
 public class ExamSettingsActivity extends AppCompatActivity {
+    /**
+     * An activity for setting exam activity
+     */
     NumberPicker questionTimePicker;
     RadioGroup difficulty;
 
@@ -25,6 +28,7 @@ public class ExamSettingsActivity extends AppCompatActivity {
         difficulty = findViewById(R.id.radioGroupDifficultySettings);
         questionTimePicker.setMinValue(5);
         questionTimePicker.setMaxValue(90);
+        // get all previous settings values from shared preferences
         SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
         int examTimeValue = sharedPreferences.getInt("exam_time", 30);
         int difficultyLevel = sharedPreferences.getInt("difficulty", 5);
@@ -32,6 +36,7 @@ public class ExamSettingsActivity extends AppCompatActivity {
         questionTimePicker.setValue(examTimeValue);
     }
 
+    // save settings to shared preferences
     public void saveSettings(View view) {
         SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

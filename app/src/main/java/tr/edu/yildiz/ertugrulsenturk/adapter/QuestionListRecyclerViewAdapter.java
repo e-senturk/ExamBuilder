@@ -106,10 +106,9 @@ public class QuestionListRecyclerViewAdapter extends RecyclerView.Adapter<Questi
             }
             // hide attachment button if its not exists
             System.out.println(questions.get(position).getAttachment().getType());
-            if(questions.get(position).getAttachment().getType().equals("none")){
+            if (questions.get(position).getAttachment().getType().equals("none")) {
                 attachmentButton.setVisibility(View.INVISIBLE);
-            }
-            else {
+            } else {
                 attachmentButton.setVisibility(View.VISIBLE);
             }
             // set question text
@@ -161,7 +160,7 @@ public class QuestionListRecyclerViewAdapter extends RecyclerView.Adapter<Questi
             // open's attachment in a dialog
             attachmentButton.setOnClickListener(v -> {
                 Attachment attachment = questions.get(position).getAttachment();
-                if(attachment!= null){
+                if (attachment != null) {
                     switch (attachment.getType()) {
                         case "video":
                             DialogTools.videoDialog(itemView.getContext(), attachment.getPath(), false, true);

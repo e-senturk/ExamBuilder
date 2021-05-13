@@ -21,12 +21,15 @@ import java.io.InvalidObjectException;
 
 import tr.edu.yildiz.ertugrulsenturk.R;
 import tr.edu.yildiz.ertugrulsenturk.model.User;
+import tr.edu.yildiz.ertugrulsenturk.service.database.UserDataBase;
 import tr.edu.yildiz.ertugrulsenturk.service.tools.BlobTools;
 import tr.edu.yildiz.ertugrulsenturk.service.tools.MediaTools;
 import tr.edu.yildiz.ertugrulsenturk.service.tools.UserValidationTools;
-import tr.edu.yildiz.ertugrulsenturk.service.database.UserDataBase;
 
 public class UserInfoActivity extends AppCompatActivity {
+    /**
+     * An activity for showing or editing user information
+     */
     private TextView userFirstName;
     private TextView userLastName;
     private TextView userEmail;
@@ -46,6 +49,7 @@ public class UserInfoActivity extends AppCompatActivity {
         userPhoneNumber = findViewById(R.id.userPhoneNumberInfo);
         userPassword = findViewById(R.id.userPasswordInfo);
         imageInfo = findViewById(R.id.userImageInfo);
+        // gets current user and prints its information
         Intent intent = getIntent();
         User user = (User) intent.getSerializableExtra("user");
         if (user != null) {
@@ -61,6 +65,7 @@ public class UserInfoActivity extends AppCompatActivity {
         }
     }
 
+    // updates current user with changed fields in database and shared preferences and opens menu activity
     public void updateUser(View view) {
         try {
             String name = UserValidationTools.validateUserFirstName(this, userFirstName.getText().toString());
@@ -85,6 +90,7 @@ public class UserInfoActivity extends AppCompatActivity {
         }
     }
 
+    // activity for selecting user image
     public void updateUserImage(View view) {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
@@ -94,6 +100,7 @@ public class UserInfoActivity extends AppCompatActivity {
         }
     }
 
+    // opens gallery directly after permission result
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == 1) {
@@ -105,10 +112,11 @@ public class UserInfoActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
+    // initializes user image
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == 2 && resultCode == RESULT_OK && data != null) {
-            userBitmap = MediaTools.initializeImageView(this,data.getData(), imageInfo);
+            userBitmap = MediaTools.initializeImageView(this, data.getData(), imageInfo);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

@@ -28,6 +28,9 @@ import tr.edu.yildiz.ertugrulsenturk.service.tools.MediaTools;
 import tr.edu.yildiz.ertugrulsenturk.service.tools.UserValidationTools;
 
 public class SignUpActivity extends AppCompatActivity {
+    /**
+     * An activity for signup
+     */
     private Bitmap userBitmap;
     private ImageView userImage;
     private TextView userSignUpName;
@@ -60,6 +63,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void signUp(View view) {
         try {
+            // validating user
             String firstName = UserValidationTools.validateUserFirstName(this, userSignUpName.getText().toString());
             String lastName = UserValidationTools.validateUserLastName(this, userSignUpSurname.getText().toString());
             String phoneNumber = UserValidationTools.validatePhoneNumber(this, userPhoneNumber.getText().toString());
@@ -69,9 +73,11 @@ public class SignUpActivity extends AppCompatActivity {
             if (UserDataBase.isExistingUser(this, MODE_PRIVATE, firstName, lastName, email)) {
                 throw new InvalidObjectException(getString(R.string.user_already_exists));
             }
+            // save new user to database and shared preferences
             User user = new User(firstName, lastName, phoneNumber, email, password, BlobTools.getBytesFromImage(userBitmap));
             UserDataBase.addUser(this, MODE_PRIVATE, user);
             saveLogin(user);
+            //close all previous activities and open menu activity
             ActivityCompat.finishAffinity(this);
             Intent intent = new Intent(SignUpActivity.this, MenuActivity.class);
             intent.putExtra("user", user);
@@ -81,6 +87,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
+    // select new user image
     public void selectUserImage(View view) {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
@@ -90,6 +97,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
+    // opens gallery directly after permission result
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == 1) {
@@ -101,14 +109,16 @@ public class SignUpActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
+    // sets user image in field
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == 2 && resultCode == RESULT_OK && data != null) {
-            userBitmap= MediaTools.initializeImageView(this, data.getData(), userImage);
+            userBitmap = MediaTools.initializeImageView(this, data.getData(), userImage);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    // saves user to shared preferences
     private void saveLogin(User user) {
         SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();

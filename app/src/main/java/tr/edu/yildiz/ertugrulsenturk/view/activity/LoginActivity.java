@@ -17,6 +17,9 @@ import tr.edu.yildiz.ertugrulsenturk.model.User;
 import tr.edu.yildiz.ertugrulsenturk.service.database.UserDataBase;
 
 public class LoginActivity extends AppCompatActivity {
+    /**
+     * An activity for login
+     */
     private static Handler handler;
     private int remainingTrial;
     private TextView password, eMail;
@@ -28,13 +31,16 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setTitle(R.string.login);
+        // stores remaining login count
         remainingTrial = 3;
+        // stores remaining seconds to reactivate login function
         second = 0;
         password = findViewById(R.id.userLoginPassword);
         eMail = findViewById(R.id.userLoginEmail);
         tryLogin();
     }
 
+    // opens signup activity
     public void signUp(View view) {
         Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
 
@@ -42,16 +48,21 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void signIn(View view) {
+        // invalid login error notifications
         if (second == 0) {
+            // try to get user from database with fields
             User user = UserDataBase.getUser(this, MODE_PRIVATE, eMail.getText().toString(), password.getText().toString());
+            // print error if user is not exists or not valid
             if (remainingTrial > 0 && user == null) {
                 Toast.makeText(this, getResources().getQuantityString(R.plurals.login_failed_remaining_count, remainingTrial, remainingTrial), Toast.LENGTH_SHORT).show();
                 remainingTrial--;
+                // after 3 trial start countdown and block login function and open signup activity
             } else if (remainingTrial == 0) {
                 Toast.makeText(this, getString(R.string.login_blocked_first_time), Toast.LENGTH_SHORT).show();
                 startTimer();
                 Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(intent);
+                // if login successful open menu activity
             } else if (user != null) {
                 saveLogin(user);
                 ActivityCompat.finishAffinity(this);
@@ -67,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    // used for user to keep login after first try
     private void tryLogin() {
         SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);
         String mail = preferences.getString("email", "");
@@ -80,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    // save login
     private void saveLogin(User user) {
         SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -88,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    // starts a countdown timer for block
     private void startTimer() {
         second = 60;
         handler = new Handler(Looper.myLooper());
