@@ -82,6 +82,10 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
             // initialize attachment
             Attachment attachment = questions.get(position).getAttachment();
             MediaTools.initializeAttachment(itemView.getContext(), attachment, videoView, imageView);
+            if(attachment.getType().equals("none")){
+                imageView.setVisibility(View.GONE);
+                videoView.setVisibility(View.GONE);
+            }
 
         }
 

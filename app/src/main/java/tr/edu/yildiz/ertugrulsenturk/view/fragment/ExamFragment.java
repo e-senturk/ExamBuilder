@@ -20,12 +20,12 @@ import tr.edu.yildiz.ertugrulsenturk.adapter.ExamRecyclerViewAdapter;
 import tr.edu.yildiz.ertugrulsenturk.model.Question;
 
 public class ExamFragment extends Fragment {
-    private final ArrayList<Question> questions;
+    private static ArrayList<Question> questions;
 
-    public ExamFragment(ArrayList<Question> questions) {
-        this.questions = questions;
+    public static ExamFragment newInstance(ArrayList<Question> questions) {
+        ExamFragment.questions = questions;
+        return new ExamFragment();
     }
-
     @Nullable
     @org.jetbrains.annotations.Nullable
     @Override

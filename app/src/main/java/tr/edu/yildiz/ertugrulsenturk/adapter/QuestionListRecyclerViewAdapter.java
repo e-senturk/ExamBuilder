@@ -67,11 +67,14 @@ public class QuestionListRecyclerViewAdapter extends RecyclerView.Adapter<Questi
     public class RowHolder extends RecyclerView.ViewHolder implements Serializable {
         // stores color list for each question
         private final int[] colors = new int[]{
-                itemView.getContext().getColor(R.color.bitter_sweet),
-                itemView.getContext().getColor(R.color.medium_turquoise),
-                itemView.getContext().getColor(R.color.midnight_green),
-                itemView.getContext().getColor(R.color.mint_cream),
-                itemView.getContext().getColor(R.color.naples_yellow)};
+                itemView.getContext().getColor(R.color.blue),
+                itemView.getContext().getColor(R.color.orange),
+                itemView.getContext().getColor(R.color.dark_green),
+                itemView.getContext().getColor(R.color.yellow),
+                itemView.getContext().getColor(R.color.medium_green),
+                itemView.getContext().getColor(R.color.violet),
+                itemView.getContext().getColor(R.color.vivid_green)
+        };
         TextView questionTextView;
         TextView choicesTextView;
         TextView answerTextView;
@@ -101,6 +104,14 @@ public class QuestionListRecyclerViewAdapter extends RecyclerView.Adapter<Questi
                 editButton.setVisibility(View.INVISIBLE);
                 deleteButton.setVisibility(View.INVISIBLE);
             }
+            // hide attachment button if its not exists
+            System.out.println(questions.get(position).getAttachment().getType());
+            if(questions.get(position).getAttachment().getType().equals("none")){
+                attachmentButton.setVisibility(View.INVISIBLE);
+            }
+            else {
+                attachmentButton.setVisibility(View.VISIBLE);
+            }
             // set question text
             String question = itemView.getContext().getString(R.string.question) + ": " + questions.get(position).getQuestion();
             questionTextView.setText(question);
@@ -110,6 +121,7 @@ public class QuestionListRecyclerViewAdapter extends RecyclerView.Adapter<Questi
             answerTextView.setText(QuestionTools.formatAnswer(questions.get(position).getAnswer(), itemView.getContext()));
             // set question's background
             questionLayout.setBackgroundColor(colors[position % colors.length]);
+
         }
 
         public void initializeFields() {
@@ -149,16 +161,18 @@ public class QuestionListRecyclerViewAdapter extends RecyclerView.Adapter<Questi
             // open's attachment in a dialog
             attachmentButton.setOnClickListener(v -> {
                 Attachment attachment = questions.get(position).getAttachment();
-                switch (attachment.getType()) {
-                    case "video":
-                        DialogTools.videoDialog(itemView.getContext(), attachment.getPath(), false, true);
-                        break;
-                    case "audio":
-                        DialogTools.videoDialog(itemView.getContext(), attachment.getPath(), true, true);
-                        break;
-                    case "image":
-                        DialogTools.imageDialog(itemView.getContext(), attachment.getPath());
-                        break;
+                if(attachment!= null){
+                    switch (attachment.getType()) {
+                        case "video":
+                            DialogTools.videoDialog(itemView.getContext(), attachment.getPath(), false, true);
+                            break;
+                        case "audio":
+                            DialogTools.videoDialog(itemView.getContext(), attachment.getPath(), true, true);
+                            break;
+                        case "image":
+                            DialogTools.imageDialog(itemView.getContext(), attachment.getPath());
+                            break;
+                    }
                 }
             });
         }

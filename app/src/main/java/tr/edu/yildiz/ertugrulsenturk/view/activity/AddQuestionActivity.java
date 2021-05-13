@@ -2,6 +2,7 @@ package tr.edu.yildiz.ertugrulsenturk.view.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -58,6 +59,7 @@ public class AddQuestionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_question);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
         setTitle(R.string.add_new_question);
         newQuestionText = findViewById(R.id.newQuestionText);
         newQuestionAnswerGroup = findViewById(R.id.newQuestionAnswerGroup);
@@ -65,7 +67,7 @@ public class AddQuestionActivity extends AppCompatActivity {
         videoView = findViewById(R.id.videoViewQuestion);
         imageView = findViewById(R.id.imageViewQuestion);
         attachmentType = findViewById(R.id.attachmentTypeRadioGroup);
-        attachmentType.check(R.id.imageAttachmentRadioButton);
+        attachmentType.check(R.id.noneAttachmentRadioButton);
         choices = new ArrayList<>();
         answers = new ArrayList<>();
         attachmentBitmap = null;
@@ -78,7 +80,16 @@ public class AddQuestionActivity extends AppCompatActivity {
         if (question != null) {
             updateFields();
         }
+        attachmentType.setOnCheckedChangeListener((group, checkedId) -> {
+            imageUri = null;
+            videoUri = null;
+            attachmentBitmap = null;
+            videoView.setVisibility(View.INVISIBLE);
+            imageView.setVisibility(View.VISIBLE);
+            imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.question_mark));
+        });
     }
+
 
     public void saveNewQuestion(View view) {
 
@@ -92,7 +103,7 @@ public class AddQuestionActivity extends AppCompatActivity {
             Toast.makeText(this, getString(R.string.choices_cannot_be_empty), Toast.LENGTH_SHORT).show();
             return;
         } else {
-            Attachment attachment = null;
+            Attachment attachment = new Attachment("-", "none", "-");
             String attachmentTypeString = getAttachmentTypeString();
             if (!attachmentTypeString.equals("") && !attachmentPath.equals("")) {
                 attachment = new Attachment(attachmentTypeString + "~" + attachmentPath);
@@ -126,7 +137,10 @@ public class AddQuestionActivity extends AppCompatActivity {
         } else if (attachmentType.getCheckedRadioButtonId() == R.id.audioAttachmentRadioButton) {
             getAudio();
         } else {
-            Toast.makeText(this, getString(R.string.unknown_error), Toast.LENGTH_SHORT).show();
+            imageUri = null;
+            videoUri = null;
+            attachmentBitmap = null;
+            Toast.makeText(this, getString(R.string.select_a_type_first), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -193,7 +207,7 @@ public class AddQuestionActivity extends AppCompatActivity {
             imageView.setVisibility(View.INVISIBLE);
             videoView.setVisibility(View.VISIBLE);
             videoUri = data.getData();
-            MediaTools.initializeVideoView(this,videoUri,videoView,false, false);
+            MediaTools.initializeVideoView(this, videoUri, videoView, false, false);
         }
         if (requestCode == 4 && resultCode == RESULT_OK && data != null) {
             videoView.setVideoURI(null);
@@ -207,7 +221,7 @@ public class AddQuestionActivity extends AppCompatActivity {
             imageView.setVisibility(View.INVISIBLE);
             videoView.setVisibility(View.VISIBLE);
             audioUri = data.getData();
-            MediaTools.initializeVideoView(this,audioUri,videoView,true, false);
+            MediaTools.initializeVideoView(this, audioUri, videoView, true, false);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -219,7 +233,7 @@ public class AddQuestionActivity extends AppCompatActivity {
         answers.clear();
         choicesLayout.removeAllViews();
         imageView.setImageBitmap(BitmapFactory.decodeResource(this.getResources(),
-                R.drawable.attachment_background));
+                R.drawable.question_mark));
         attachmentBitmap = null;
         imageUri = null;
         audioUri = null;
@@ -276,7 +290,7 @@ public class AddQuestionActivity extends AppCompatActivity {
             RadioButton radioButton = new RadioButton(this);
             String labelRadio = String.valueOf((char) (answers.size() + (int) 'A'));
             radioButton.setText(labelRadio);
-            radioButton.setWidth(220);
+            radioButton.setWidth(newQuestionAnswerGroup.getWidth() / 5);
             answers.add(radioButton);
             newQuestionAnswerGroup.addView(radioButton);
         }

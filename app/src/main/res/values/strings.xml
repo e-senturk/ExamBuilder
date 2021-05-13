@@ -101,11 +101,13 @@
     <string name="share_exam_title">Share exam</string>
     <string name="answers">Answers</string>
     <string name="exam_updated">Exam Updated</string>
+    <string name="no_attachment">None</string>
+    <string name="select_a_type_first">Select a type first</string>
     <string name="image">Image</string>
     <string name="video">Video</string>
     <string name="audio">Audio</string>
     <string name="select">Select</string>
-    <string name="remaining_time">Remaining\nTime</string>
+    <string name="remaining_time">Time left:</string>
     <string name="finish_exam">Finish Exam</string>
     <string name="user">User:</string>
     <string name="congrats">Congratulations</string>

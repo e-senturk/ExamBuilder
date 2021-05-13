@@ -18,7 +18,7 @@
         android:onClick="addQuestion"
         style="@style/ImageAndTextButton"
         app:icon="@drawable/add"
-
+        app:iconTint="@color/blue"
         app:iconGravity="start"
         />
     <Button
@@ -28,6 +28,7 @@
         android:onClick="listQuestions"
         style="@style/ImageAndTextButton"
         android:text="@string/list_questions"
+        app:iconTint="@color/pale_green"
         app:icon="@drawable/list"
         app:iconGravity="start"
         />
@@ -39,6 +40,7 @@
         android:onClick="examSettings"
         android:text="@string/exam_settings"
         app:icon="@drawable/settings"
+        app:iconTint="@color/orange"
         app:iconGravity="start"
         />
     <Button
@@ -49,6 +51,7 @@
         android:onClick="createExam"
         android:text="@string/create_exam"
         app:icon="@drawable/edit"
+        app:iconTint="@color/dark_green"
         app:iconGravity="start"
         />
     <Button
@@ -59,6 +62,7 @@
         android:onClick="userInformation"
         style="@style/ImageAndTextButton"
         app:icon="@drawable/user_info"
+        app:iconTint="@color/yellow"
         app:iconGravity="start"
         />
     <Button
@@ -69,6 +73,7 @@
         android:onClick="logOut"
         style="@style/ImageAndTextButton"
         app:icon="@drawable/logout"
+        app:iconTint="@color/medium_green"
         app:iconGravity="start"
         />
 

@@ -15,18 +15,19 @@ import org.jetbrains.annotations.NotNull;
 import tr.edu.yildiz.ertugrulsenturk.R;
 
 public class ResultFragment extends Fragment {
-    private final String userName;
-    private final String correct;
-    private final String incorrect;
-    private final String unanswered;
-    private final String grade;
+    private static String userName;
+    private static String correct;
+    private static String incorrect;
+    private static String unanswered;
+    private static String grade;
 
-    public ResultFragment(String userName, int correct, int incorrect, int unanswered) {
-        this.userName = userName;
-        this.correct = String.valueOf(correct);
-        this.incorrect = String.valueOf(incorrect);
-        this.unanswered = String.valueOf(unanswered);
-        this.grade = String.valueOf((correct * 100) / (correct + incorrect + unanswered));
+    public static ResultFragment newInstance(String userName, int correct, int incorrect, int unanswered) {
+        ResultFragment.userName = userName;
+        ResultFragment.correct = String.valueOf(correct);
+        ResultFragment.incorrect = String.valueOf(incorrect);
+        ResultFragment.unanswered = String.valueOf(unanswered);
+        ResultFragment.grade = String.valueOf((correct * 100) / (correct + incorrect + unanswered));
+        return new ResultFragment();
     }
 
     @Nullable

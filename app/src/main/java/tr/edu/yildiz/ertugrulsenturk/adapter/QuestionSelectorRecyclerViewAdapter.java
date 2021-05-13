@@ -69,7 +69,8 @@ public class QuestionSelectorRecyclerViewAdapter extends RecyclerView.Adapter<Qu
         public void bind(Integer position) {
             // set question's text / this view only shows questions not choices or answers
             TextView questionInfo = itemView.findViewById(R.id.textQuestionListing);
-            questionInfo.setText(questions.get(position).getQuestion());
+            String questionText = itemView.getContext().getString(R.string.question)+": "+questions.get(position).getQuestion();
+            questionInfo.setText(questionText);
             // set selection pattern if there are already selected questions
             CheckBox questionSelect = itemView.findViewById(R.id.radioButtonQuestionListing);
             if (selected.contains(questions.get(position).getPrivateKey())) {

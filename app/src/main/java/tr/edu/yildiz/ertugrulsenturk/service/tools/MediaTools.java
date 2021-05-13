@@ -119,6 +119,10 @@ public class MediaTools {
                 }
             }
         }
+        else {
+            videoView.setVisibility(View.GONE);
+            imageView.setVisibility(View.GONE);
+        }
     }
 
     // put a blur filter on a text view

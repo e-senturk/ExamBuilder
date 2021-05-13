@@ -1,6 +1,7 @@
 package tr.edu.yildiz.ertugrulsenturk.view.activity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -15,8 +16,8 @@ import java.util.ArrayList;
 
 import tr.edu.yildiz.ertugrulsenturk.R;
 import tr.edu.yildiz.ertugrulsenturk.adapter.ExamRecyclerViewAdapter;
-import tr.edu.yildiz.ertugrulsenturk.model.Question;
 import tr.edu.yildiz.ertugrulsenturk.model.Exam;
+import tr.edu.yildiz.ertugrulsenturk.model.Question;
 import tr.edu.yildiz.ertugrulsenturk.model.User;
 import tr.edu.yildiz.ertugrulsenturk.service.tools.ExamTools;
 import tr.edu.yildiz.ertugrulsenturk.service.tools.QuestionTools;
@@ -35,7 +36,7 @@ public class ExamActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exam);
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
 
         TextView userNameText = findViewById(R.id.examUserName);
         TextView secondText = findViewById(R.id.examSecond);
@@ -65,7 +66,7 @@ public class ExamActivity extends AppCompatActivity {
             }
         };
         handler.post(clock);
-        String examText = userNameText.getText() + "\n" + currentUser.getUserFirstName() + " " + currentUser.getUserLastName();
+        String examText = userNameText.getText()+" "+ currentUser.getUserFirstName() + " " + currentUser.getUserLastName();
         userNameText.setText(examText);
         startExamFragment();
     }
@@ -74,7 +75,7 @@ public class ExamActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        examFragment = new ExamFragment(questions);
+        examFragment = ExamFragment.newInstance(questions);
         fragmentTransaction.add(R.id.examFragmentLayout, examFragment).commit();
     }
 
@@ -83,12 +84,12 @@ public class ExamActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.remove(examFragment);
-        ResultFragment resultFragment = new ResultFragment(currentUser.getUserFirstName(), results[0], results[1], results[2]);
+        ResultFragment resultFragment = ResultFragment.newInstance(currentUser.getUserFirstName(), results[0], results[1], results[2]);
         fragmentTransaction.add(R.id.examFragmentLayout, resultFragment).commit();
     }
 
     public void finishExamButton(View view) {
-        if(examTime >0)
+        if (examTime > 0)
             examTime = 0;
         else
             finish();

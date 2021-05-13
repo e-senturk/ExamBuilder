@@ -34,6 +34,8 @@
     <string name="show_answer">Cevabı göster</string>
     <string name="attachment">Attachment</string>
     <string name="attachment_type">Eklenti Türü:</string>
+    <string name="no_attachment">Yok</string>
+    <string name="select_a_type_first">Önce bir tip seçin</string>
     <string name="question_saved">Soru kaydedildi</string>
     <string name="save">Kaydet</string>
     <string name="delete">Sil</string>
@@ -106,7 +108,7 @@
     <string name="video">Video</string>
     <string name="audio">Ses</string>
     <string name="select">Seç</string>
-    <string name="remaining_time">Kalan\nSüre</string>
+    <string name="remaining_time">Kalan Süre</string>
     <string name="finish_exam">Sınavı Bitir</string>
     <string name="user">Kullanıcı:</string>
     <string name="congrats">Tebrikler</string>

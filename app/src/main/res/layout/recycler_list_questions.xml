@@ -11,97 +11,101 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/questionConstraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="230dp"
         android:layout_marginBottom="3dp">
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_editor_absoluteX="1dp" />
 
         <TextView
             android:id="@+id/textExamQuestion"
             style="@style/QuestionTextStyle"
-            android:layout_width="292dp"
+            android:layout_width="match_parent"
             android:layout_height="59dp"
-            android:autofillHints="."
             android:layout_marginTop="10dp"
+            android:autofillHints="."
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="70dp"
             android:gravity="top"
             android:hint="@string/question"
-            app:layout_constraintStart_toStartOf="@+id/choicesRecycler"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="16dp" />
 
         <TextView
             android:id="@+id/choicesRecycler"
             style="@style/QuestionTextStyle"
-            android:layout_width="292dp"
+            android:layout_width="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="70dp"
             android:layout_height="100dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:autofillHints="."
             android:hint="@string/choices"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textExamQuestion" />
+            app:layout_constraintTop_toBottomOf="@+id/textExamQuestion"
+            tools:layout_editor_absoluteX="16dp" />
 
         <TextView
             android:id="@+id/textAnswer"
             style="@style/QuestionTextStyle"
-            android:layout_width="292dp"
+            android:layout_width="match_parent"
             android:layout_height="28dp"
+            android:layout_marginTop="10dp"
             android:autofillHints="."
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="70dp"
             android:hint="@string/answer"
-            app:layout_constraintBottom_toBottomOf="@+id/questionShowAnswer"
-            app:layout_constraintEnd_toEndOf="@+id/choicesRecycler"
-            app:layout_constraintStart_toStartOf="@+id/choicesRecycler"
-            app:layout_constraintTop_toTopOf="@+id/questionShowAnswer" />
+            app:layout_constraintTop_toBottomOf="@+id/choicesRecycler"
+            tools:layout_editor_absoluteX="0dp" />
 
         <ImageButton
             android:id="@+id/questionEditButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/ImageButtonStyle"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="16dp"
             android:contentDescription="@string/save"
-            app:layout_constraintEnd_toEndOf="@+id/questionDeleteButton"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/choicesRecycler"
             app:srcCompat="@drawable/edit" />
 
         <ImageButton
             android:id="@+id/questionDeleteButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="4dp"
+            style="@style/ImageButtonStyle"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginBottom="6dp"
             android:contentDescription="@string/delete"
             app:layout_constraintBottom_toBottomOf="@+id/choicesRecycler"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/questionEditButton"
             app:srcCompat="@drawable/delete" />
 
         <ImageButton
             android:id="@+id/questionShowAnswer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            style="@style/ImageButtonStyle"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:contentDescription="@string/show_answer"
-            app:layout_constraintEnd_toEndOf="@+id/questionDeleteButton"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintBottom_toBottomOf="@+id/textAnswer"
             app:layout_constraintStart_toStartOf="@+id/questionDeleteButton"
-            app:layout_constraintTop_toBottomOf="@+id/choicesRecycler"
+            app:layout_constraintTop_toTopOf="@+id/textAnswer"
             app:srcCompat="@drawable/visible" />
 
         <ImageButton
             android:id="@+id/questionAttachment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/ImageButtonStyle"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:contentDescription="@string/attachment"
             app:layout_constraintBottom_toBottomOf="@+id/textExamQuestion"
-            app:layout_constraintEnd_toEndOf="@+id/questionEditButton"
             app:layout_constraintStart_toStartOf="@+id/questionEditButton"
             app:layout_constraintTop_toTopOf="@+id/textExamQuestion"
             app:srcCompat="@drawable/attachment" />
-
-        <View
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:layout_editor_absoluteX="1dp" />
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

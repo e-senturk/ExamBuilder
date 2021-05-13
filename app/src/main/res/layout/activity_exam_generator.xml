@@ -1,187 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".view.activity.ExamGeneratorActivity">
-
-    <Button
-        android:id="@+id/selectQuestion"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:onClick="selectQuestion"
-        android:text="@string/questions"
-        app:layout_constraintEnd_toEndOf="@+id/examIdInfoText"
-        app:layout_constraintTop_toBottomOf="@+id/examIdInfoText" />
-
-    <Button
-        android:id="@+id/startExamButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="startExam"
-        android:text="@string/start_exam"
-        app:layout_constraintBottom_toBottomOf="@+id/shareExamButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/shareExamButton"
-        app:layout_constraintTop_toTopOf="@+id/shareExamButton" />
-
-    <NumberPicker
-        android:id="@+id/timerPicker"
-        android:layout_width="250dp"
-        android:layout_height="114dp"
-        android:layout_marginTop="0dp"
-        app:layout_constraintEnd_toEndOf="@+id/selectQuestion"
-        app:layout_constraintTop_toBottomOf="@+id/selectQuestion">
-
-    </NumberPicker>
-
-    <RadioGroup
-        android:id="@+id/radioGroupDifficulty"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/timerPicker"
-        app:layout_constraintTop_toBottomOf="@+id/timerPicker">
-
-        <RadioButton
-            android:id="@+id/radioButtonDifficulty2"
-            android:layout_width="62.5dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/two"
-            android:checked="true"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_gravity="center"
+            tools:context=".view.activity.ExamGeneratorActivity">
 
-        <RadioButton
-            android:id="@+id/radioButtonDifficulty3"
-            android:layout_width="62.5dp"
-            android:layout_height="wrap_content"
-            android:text="@string/three"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <Button
+                android:id="@+id/selectQuestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:onClick="selectQuestion"
+                android:layout_marginStart="120dp"
+                android:layout_marginEnd="12dp"
+                android:text="@string/questions"
+                app:layout_constraintEnd_toEndOf="@+id/examIdInfoText"
+                app:layout_constraintTop_toBottomOf="@+id/examIdInfoText" />
 
-        <RadioButton
-            android:id="@+id/radioButtonDifficulty4"
-            android:layout_width="62.5dp"
-            android:layout_height="wrap_content"
-            android:text="@string/four"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <Button
+                android:id="@+id/startExamButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="startExam"
+                android:text="@string/start_exam"
+                app:layout_constraintBottom_toBottomOf="@+id/shareExamButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/shareExamButton"
+                app:layout_constraintTop_toTopOf="@+id/shareExamButton" />
 
-        <RadioButton
-            android:id="@+id/radioButtonDifficulty5"
-            android:layout_width="62.5dp"
-            android:layout_height="wrap_content"
-            android:text="@string/five"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <NumberPicker
+                android:id="@+id/timerPicker"
+                android:layout_marginStart="120dp"
+                android:layout_marginEnd="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="114dp"
+                app:layout_constraintEnd_toEndOf="@+id/selectQuestion"
+                app:layout_constraintTop_toBottomOf="@+id/selectQuestion">
 
-    </RadioGroup>
+            </NumberPicker>
 
-    <EditText
-        android:id="@+id/examIdInfoText"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="24dp"
-        android:ems="10"
-        android:hint="@string/exam_code"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="@string/exam_code" />
+            <RadioGroup
+                android:id="@+id/radioGroupDifficulty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:layout_marginStart="120dp"
+                android:layout_marginEnd="12dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@+id/timerPicker"
+                app:layout_constraintTop_toBottomOf="@+id/timerPicker">
 
-    <Spinner
-        android:id="@+id/examCodeSpinner"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="@+id/radioGroupDifficulty"
-        app:layout_constraintStart_toStartOf="@+id/radioGroupDifficulty"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupDifficulty" />
+                <RadioButton
+                    android:id="@+id/radioButtonDifficulty2"
+                    android:layout_width="62.5dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/two"
+                    android:checked="true"
+                    android:layout_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:text="@string/exam_code_2"
-        app:layout_constraintBottom_toBottomOf="@+id/examIdInfoText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/examIdInfoText" />
+                <RadioButton
+                    android:id="@+id/radioButtonDifficulty3"
+                    android:layout_width="62.5dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/three"
+                    android:layout_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/select_question"
-        app:layout_constraintBottom_toBottomOf="@+id/selectQuestion"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="@+id/selectQuestion" />
+                <RadioButton
+                    android:id="@+id/radioButtonDifficulty4"
+                    android:layout_width="62.5dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/four"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/exam_time"
-        app:layout_constraintBottom_toBottomOf="@+id/timerPicker"
-        app:layout_constraintStart_toStartOf="@+id/textView7"
-        app:layout_constraintTop_toTopOf="@+id/timerPicker" />
+                <RadioButton
+                    android:id="@+id/radioButtonDifficulty5"
+                    android:layout_width="62.5dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/five"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/difficulty_level"
-        app:layout_constraintBottom_toBottomOf="@+id/radioGroupDifficulty"
-        app:layout_constraintStart_toStartOf="@+id/textView12"
-        app:layout_constraintTop_toTopOf="@+id/radioGroupDifficulty" />
+            </RadioGroup>
 
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/saved_exam"
-        app:layout_constraintBottom_toBottomOf="@+id/examCodeSpinner"
-        app:layout_constraintStart_toStartOf="@+id/textView14"
-        app:layout_constraintTop_toTopOf="@+id/examCodeSpinner" />
+            <EditText
+                android:id="@+id/examIdInfoText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="@string/exam_code"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:layout_marginStart="120dp"
+                android:layout_marginEnd="12dp"
+                android:hint="@string/exam_code"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/saveExamButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/save_exam"
-        android:onClick="saveExam"
-        app:layout_constraintBottom_toBottomOf="@+id/shareExamButton"
-        app:layout_constraintEnd_toStartOf="@+id/shareExamButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/shareExamButton" />
+            <Spinner
+                android:id="@+id/examCodeSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginStart="120dp"
+                android:layout_marginEnd="12dp"
+                app:layout_constraintEnd_toEndOf="@+id/radioGroupDifficulty"
+                app:layout_constraintStart_toStartOf="@+id/radioGroupDifficulty"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroupDifficulty" />
 
-    <Button
-        android:id="@+id/shareExamButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:text="@string/share_exam"
-        android:onClick="saveExam"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/examCodeSpinner" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:text="@string/exam_code_2"
+                app:layout_constraintBottom_toBottomOf="@+id/examIdInfoText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/examIdInfoText" />
 
-    <Button
-        android:id="@+id/deleteExamButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/delete_exam"
-        android:onClick="deleteExam"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shareExamButton" />
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/select_question"
+                app:layout_constraintBottom_toBottomOf="@+id/selectQuestion"
+                app:layout_constraintStart_toStartOf="@+id/textView2"
+                app:layout_constraintTop_toTopOf="@+id/selectQuestion" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/exam_time"
+                app:layout_constraintBottom_toBottomOf="@+id/timerPicker"
+                app:layout_constraintStart_toStartOf="@+id/textView7"
+                app:layout_constraintTop_toTopOf="@+id/timerPicker" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/difficulty_level"
+                app:layout_constraintBottom_toBottomOf="@+id/radioGroupDifficulty"
+                app:layout_constraintStart_toStartOf="@+id/textView12"
+                app:layout_constraintTop_toTopOf="@+id/radioGroupDifficulty" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/saved_exam"
+                app:layout_constraintBottom_toBottomOf="@+id/examCodeSpinner"
+                app:layout_constraintStart_toStartOf="@+id/textView14"
+                app:layout_constraintTop_toTopOf="@+id/examCodeSpinner" />
+
+            <Button
+                android:id="@+id/saveExamButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save_exam"
+                android:onClick="saveExam"
+                app:layout_constraintBottom_toBottomOf="@+id/shareExamButton"
+                app:layout_constraintEnd_toStartOf="@+id/shareExamButton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/shareExamButton" />
+
+            <Button
+                android:id="@+id/shareExamButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="72dp"
+                android:text="@string/share_exam"
+                android:onClick="saveExam"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/examCodeSpinner" />
+
+            <Button
+                android:id="@+id/deleteExamButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/delete_exam"
+                android:onClick="deleteExam"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shareExamButton" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</ScrollView>
