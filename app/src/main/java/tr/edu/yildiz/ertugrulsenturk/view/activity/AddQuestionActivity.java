@@ -291,6 +291,18 @@ public class AddQuestionActivity extends AppCompatActivity {
             addChoice(false);
         }
         Attachment attachment = question.getAttachment();
+        String type = attachment.getType();
+        switch (type) {
+            case "video":
+                attachmentType.check(R.id.videoAttachmentRadioButton);
+                break;
+            case "audio":
+                attachmentType.check(R.id.audioAttachmentRadioButton);
+                break;
+            case "image":
+                attachmentType.check(R.id.imageAttachmentRadioButton);
+                break;
+        }
         MediaTools.initializeAttachment(this, attachment, videoView, imageView);
         // If choice count changes then select the first choice
         if (answers.size() != 0 && answers.size() > answerInfo) {
